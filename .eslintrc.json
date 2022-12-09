@@ -20,6 +20,16 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "prettier/prettier": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
@@ -36,6 +46,14 @@
         "controlComponents": ["CustomInput"],
         "depth": 3
       }
-    ]
+    ],
+    "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

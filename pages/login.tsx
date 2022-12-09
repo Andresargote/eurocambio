@@ -1,11 +1,6 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { InputText } from 'primereact/inputtext'
-import { Password } from 'primereact/password'
-import { Button } from 'primereact/button'
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
+import { LoginComponent } from '../components/LoginComponent'
+
 import styles from '../styles/Login.module.css'
 
 export default function Login() {
@@ -21,31 +16,7 @@ export default function Login() {
           ¡Bienvenido a Eurocambiovla!
         </h1>
         <main>
-          <div className={styles.loginContainer}>
-            <form className={styles.formContainer}>
-              <div className={styles.inputContainer}>
-                <label htmlFor="email">Email</label>
-                <InputText id="email" />
-              </div>
-              <div className={styles.inputContainer}>
-                <label htmlFor="password">Contraseña</label>
-                <Password inputId="password" feedback={false} toggleMask />
-              </div>
-            </form>
-            <Button
-              label="Iniciar sesión"
-              loading={false}
-              className="p-button-info"
-            />
-            <div className={styles.loginHelpContainer}>
-              <p>¿Aún no tienes cuenta?</p>
-              <Link href="/">Registrate</Link>
-            </div>
-            <div className={styles.loginHelpContainer}>
-              <p>¿Olvidaste tu contraseña?</p>
-              <Link href="/">Recuperar contraseña</Link>
-            </div>
-          </div>
+          <LoginComponent />
         </main>
       </div>
     </>

@@ -1,0 +1,54 @@
+.container {
+  max-width: 630px;
+  margin: auto;
+  padding: 20px;
+}
+
+.containerSignUpTitle {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.signUpContainer button {
+  width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputContainer label {
+  font-size: 1rem;
+}
+
+.inputContainer input {
+  width: 100%;
+}
+
+.signUpHelpContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signUpHelpContainer p,
+.signUpHelpContainer a {
+  font-size: 0.9rem;
+}
+
+.signUpHelpContainer p {
+  color: var(--gray);
+}
+
+.signUpHelpContainer a {
+  color: #2463eb;
+}

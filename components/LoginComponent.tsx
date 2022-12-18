@@ -7,10 +7,6 @@ import { Button } from 'primereact/button'
 import { classNames } from 'primereact/utils'
 import styles from '../styles/Login.module.css'
 
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
-
 type FormValues = {
   email: string
   password: string

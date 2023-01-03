@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  margin-bottom: 60px;
+}
+
+.containerPageNameAndAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.avatarButton {
+  background-color: transparent;
+  border: none;
+}
+
+.header nav div ul {
+  background-color: transparent !important;
+}
+
+.header nav div ul li a {
+  background-color: transparent !important;
+}

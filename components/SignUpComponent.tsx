@@ -9,7 +9,8 @@ import { classNames } from 'primereact/utils'
 import styles from '../styles/SignUp.module.css'
 
 type FormValues = {
-  fullName: string
+  name: string
+  lastName: string
   email: string
   gender: string
   password: string
@@ -18,7 +19,8 @@ type FormValues = {
 export default function SignUpComponent() {
   const [loading, setLoading] = useState(false)
   const defaultValues: FormValues = {
-    fullName: '',
+    name: '',
+    lastName: '',
     email: '',
     gender: '',
     password: ''
@@ -47,28 +49,53 @@ export default function SignUpComponent() {
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>
           <label
-            htmlFor="fullName"
-            className={classNames({ 'p-error': !!errors.fullName })}
+            htmlFor="name"
+            className={classNames({ 'p-error': !!errors.name })}
           >
-            Nombre completo
+            Nombre
           </label>
           <Controller
-            name="fullName"
+            name="name"
             control={control}
             rules={{
-              required: 'Nombre completo es requerido.'
+              required: 'Nombre es requerido.'
             }}
             render={({ field }) => (
               <InputText
                 id={field.name}
                 {...field}
                 className={classNames({
-                  'p-invalid': !!errors.fullName
+                  'p-invalid': !!errors.name
                 })}
               />
             )}
           />
-          {getFormErrorMessage('fullName')}
+          {getFormErrorMessage('name')}
+        </div>
+        <div className={styles.inputContainer}>
+          <label
+            htmlFor="lastName"
+            className={classNames({ 'p-error': !!errors.lastName })}
+          >
+            Apellido
+          </label>
+          <Controller
+            name="lastName"
+            control={control}
+            rules={{
+              required: 'Apellido es requerido.'
+            }}
+            render={({ field }) => (
+              <InputText
+                id={field.name}
+                {...field}
+                className={classNames({
+                  'p-invalid': !!errors.lastName
+                })}
+              />
+            )}
+          />
+          {getFormErrorMessage('lastName')}
         </div>
         <div className={styles.inputContainer}>
           <label

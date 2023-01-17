@@ -18,7 +18,7 @@ export default function Header() {
             className={styles.avatarButton}
             aria-haspopup
             aria-controls="overlay_tmenu"
-            onClick={(event) => menu.current.toggle(event)}
+            /*  onClick={(event) => menu.current.toggle(event)} */
           >
             <Avatar
               label="A"

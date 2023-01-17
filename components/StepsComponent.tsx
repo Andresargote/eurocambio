@@ -1,6 +1,10 @@
 import { Steps } from 'primereact/steps'
 
-export function StepsComponent() {
+interface StepsComponentProps {
+  currentStep: number
+}
+
+export function StepsComponent({ currentStep }: StepsComponentProps) {
   const items = [
     {
       label: 'Cantidad y entrega'
@@ -23,7 +27,7 @@ export function StepsComponent() {
         marginBottom: '60px'
       }}
     >
-      <Steps model={items} />
+      <Steps model={items} activeIndex={currentStep} />
     </div>
   )
 }

@@ -100,7 +100,7 @@ export function LoginComponent() {
       </form>
       <div className={styles.loginHelpContainer}>
         <p>¿Aún no tienes cuenta?</p>
-        <Link href="/">Registrate</Link>
+        <Link href="/signup">Registrate</Link>
       </div>
       <div className={styles.loginHelpContainer}>
         <p>¿Olvidaste tu contraseña?</p>

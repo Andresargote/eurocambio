@@ -4,6 +4,7 @@ import { Dropdown } from 'primereact/dropdown'
 import { InputText } from 'primereact/inputtext'
 import { InputNumber } from 'primereact/inputnumber'
 import { Button } from 'primereact/button'
+import { TransactionStepProps } from '../utils/interfaces/transaction-step-props'
 import styles from '../styles/TransactionSteps.module.css'
 
 type FormValues = {
@@ -17,7 +18,10 @@ type FormValues = {
   accountHolderPhoneNumber: string
 }
 
-export function SecondTransactionStep() {
+export function SecondTransactionStep({
+  nextStep,
+  prevStep
+}: TransactionStepProps) {
   const defaultValues: FormValues = {
     identityDocument: '',
     identityDocumentNumber: '',
@@ -297,8 +301,19 @@ export function SecondTransactionStep() {
             label="Regresar"
             icon="pi pi-arrow-left"
             className="p-button-raised p-button-secondary"
+            onClick={(e) => {
+              e.preventDefault()
+              if (prevStep) prevStep()
+            }}
           />
-          <Button label="Continuar" className="p-button-info" />
+          <Button
+            label="Continuar"
+            className="p-button-info"
+            onClick={(e) => {
+              e.preventDefault()
+              if (nextStep) nextStep()
+            }}
+          />
         </div>
       </form>
     </div>

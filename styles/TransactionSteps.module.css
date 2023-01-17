@@ -21,3 +21,15 @@
 .formButtons button {
   width: 100%;
 }
+
+.transactionDetailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

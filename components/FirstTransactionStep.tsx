@@ -4,6 +4,7 @@ import { InputNumber } from 'primereact/inputnumber'
 import { Message } from 'primereact/message'
 import { Dropdown } from 'primereact/dropdown'
 import { Button } from 'primereact/button'
+import { TransactionStepProps } from '../utils/interfaces/transaction-step-props'
 import styles from '../styles/TransactionSteps.module.css'
 
 type FormValues = {
@@ -12,7 +13,7 @@ type FormValues = {
   shippingMethod: string
 }
 
-export function FirstTransactionStep() {
+export function FirstTransactionStep({ nextStep }: TransactionStepProps) {
   const defaultValues: FormValues = {
     youSend: 0,
     recipientReceives: 0,
@@ -119,7 +120,15 @@ export function FirstTransactionStep() {
             )}
           />
         </div>
-        <Button type="submit" label="Continuar" className="p-button-info" />
+        <Button
+          type="submit"
+          label="Continuar"
+          className="p-button-info"
+          onClick={(e) => {
+            e.preventDefault()
+            if (nextStep) nextStep()
+          }}
+        />
       </form>
     </div>
   )

@@ -5,36 +5,43 @@ import { InputText } from 'primereact/inputtext'
 import { Button } from 'primereact/button'
 import { ClientDetails } from './ClientDetails'
 import { TransactionDetails } from './TransactionDetails'
-import { TransactionStepProps } from '../utils/interfaces/transaction-step-props'
 import styles from '../styles/TransactionSteps.module.css'
-
-type FormValues = {
-  purpose: string
-  paymentReference: string
-}
 
 export function ThirdTransactionStep({
   nextStep,
-  prevStep
-}: TransactionStepProps) {
-  const defaultValues: FormValues = {
-    purpose: '',
-    paymentReference: ''
+  prevStep,
+  orderInfo,
+  setOrderInfo
+}) {
+  const defaultValues = {
+    purpose: orderInfo?.purpose || '',
+    paymentReference: orderInfo?.paymentReference || ''
   }
 
   const {
     control,
     formState: { errors },
-    handleSubmit,
-    reset
+    handleSubmit
   } = useForm({ defaultValues })
+
+  const onSubmit = (data, e) => {
+    e.preventDefault()
+    setOrderInfo((prev) => ({
+      ...prev,
+      ...data
+    }))
+    nextStep()
+  }
+
+  const getFormErrorMessage = (name) =>
+    errors[name] && <small className="p-error">{errors[name]?.message}</small>
 
   return (
     <div className={styles.transactionDetailContainer}>
-      <TransactionDetails />
-      <ClientDetails />
+      <TransactionDetails orderInfo={orderInfo} />
+      <ClientDetails orderInfo={orderInfo} />
 
-      <form className={styles.formContainer}>
+      <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>
           <label
             htmlFor="purpose"
@@ -55,14 +62,10 @@ export function ThirdTransactionStep({
                 id={field.name}
                 {...field}
                 options={[
-                  {
-                    label: 'Mantenimiento de familiares',
-                    value: 'Mantenimiento de familiares'
-                  },
-                  {
-                    label: 'Pago de servicios',
-                    value: 'Pago de servicios'
-                  }
+                  { label: 'Ahorros', value: 'Ahorros' },
+                  { label: 'Ayuda familiar', value: 'Ayuda familiar' },
+                  { label: 'Gastos', value: 'Gastos' },
+                  { label: 'Otros', value: 'Otros' }
                 ]}
                 className={classNames({
                   'p-invalid': !!errors.purpose
@@ -71,16 +74,12 @@ export function ThirdTransactionStep({
               />
             )}
           />
+          {getFormErrorMessage('purpose')}
         </div>
 
         <div className={styles.inputContainer}>
-          <label
-            htmlFor="paymentReference"
-            className={classNames({
-              'p-error': !!errors.paymentReference
-            })}
-          >
-            Número de documento del destinatario
+          <label htmlFor="paymentReference">
+            Referencia de pago (opcional)
           </label>
           <Controller
             name="paymentReference"
@@ -88,6 +87,7 @@ export function ThirdTransactionStep({
             render={({ field }) => <InputText id={field.name} {...field} />}
           />
         </div>
+
         <div className={styles.formButtons}>
           <Button
             label="Regresar"
@@ -98,14 +98,7 @@ export function ThirdTransactionStep({
               if (prevStep) prevStep()
             }}
           />
-          <Button
-            label="Continuar"
-            className="p-button-info"
-            onClick={(e) => {
-              e.preventDefault()
-              if (nextStep) nextStep()
-            }}
-          />
+          <Button label="Continuar" className="p-button-info" type="submit" />
         </div>
       </form>
     </div>

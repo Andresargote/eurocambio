@@ -15,6 +15,25 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/LoginComponent.js",
+    "services/api.js",
+    "services/apiClient.js",
+    "context/AuthContext.js",
+    "components/Header.js",
+    "services/users.js",
+    "pages/app/index.js",
+    "pages/exchange-rates.js",
+    "components/FirstTransactionStep.js",
+    "components/TransactionWrapper.js",
+    "components/SecondTransactionStep.js",
+    "components/TransactionDetails.js",
+    "components/ThirdTransactionStep.js",
+    "components/ClientDetails.js",
+    "components/FourthTransactionStep.js"
+  ],
   "exclude": ["node_modules"]
 }

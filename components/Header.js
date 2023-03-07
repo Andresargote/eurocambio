@@ -1,12 +1,16 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { Avatar } from 'primereact/avatar'
 import { TabMenu } from 'primereact/tabmenu'
 import { TieredMenu } from 'primereact/tieredmenu'
+import { useRouter } from 'next/router'
 
 import styles from '../styles/Header.module.css'
+import { AuthContext } from '../context/AuthContext'
 
 export default function Header() {
   const menu = useRef(null)
+  const { user, signOut } = useContext(AuthContext)
+  const router = useRouter()
 
   return (
     <header className={styles.header}>
@@ -18,10 +22,10 @@ export default function Header() {
             className={styles.avatarButton}
             aria-haspopup
             aria-controls="overlay_tmenu"
-            /*  onClick={(event) => menu.current.toggle(event)} */
+            onClick={(event) => menu.current.toggle(event)}
           >
             <Avatar
-              label="A"
+              label={user?.firstName.charAt(0)}
               shape="circle"
               size="large"
               style={{ backgroundColor: '#2196F3', color: '#ffffff' }}
@@ -35,7 +39,8 @@ export default function Header() {
               },
               {
                 label: 'Cerrar sesión',
-                icon: 'pi pi-sign-out'
+                icon: 'pi pi-sign-out',
+                command: () => signOut()
               }
             ]}
             popup
@@ -51,6 +56,11 @@ export default function Header() {
             {
               label: 'Historial de transacciones',
               icon: 'pi pi-history'
+            },
+            true && {
+              label: 'Tipos de cambio',
+              icon: 'pi pi-money-bill',
+              command: () => router.push('/exchange-rates')
             }
           ]}
         />

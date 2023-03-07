@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Head from 'next/head'
 import Header from '../../components/Header'
 import { TransactionWrapper } from '../../components/TransactionWrapper'
+import { withSSRAuth } from '../../utils/withSSRAuth'
 
 export default function Login() {
   return (
@@ -17,3 +19,7 @@ export default function Login() {
     </>
   )
 }
+
+export const getServerSideProps = withSSRAuth(async () => ({
+  props: {}
+}))

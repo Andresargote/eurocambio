@@ -1,4 +1,6 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import { parseCookies } from 'nookies'
 import SignUpComponent from '../components/SignUpComponent'
 import styles from '../styles/SignUp.module.css'
 
@@ -21,4 +23,21 @@ export default function Login() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx)
+
+  if (cookies['nextauth.token']) {
+    return {
+      redirect: {
+        destination: '/app',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }

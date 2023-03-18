@@ -34,10 +34,6 @@ export default function Header() {
           <TieredMenu
             model={[
               {
-                label: 'Mi cuenta',
-                icon: 'pi pi-user'
-              },
-              {
                 label: 'Cerrar sesión',
                 icon: 'pi pi-sign-out',
                 command: () => signOut()
@@ -52,7 +48,11 @@ export default function Header() {
       <nav>
         <TabMenu
           model={[
-            { label: 'Envíar remesa', icon: 'pi pi-money-bill' },
+            {
+              label: 'Envíar remesa',
+              icon: 'pi pi-money-bill',
+              command: () => router.push('/app')
+            },
             {
               label: 'Historial de transacciones',
               icon: 'pi pi-history'

@@ -1,0 +1,9 @@
+# Query: Infor
+# ContextLines: 1
+
+1 result - 1 file
+
+components/StepsComponent.tsx:
+  12      {
+  13:       label: 'Informarción del destinario'
+  14      },

@@ -10,7 +10,7 @@ export function StepsComponent({ currentStep }: StepsComponentProps) {
       label: 'Cantidad y entrega'
     },
     {
-      label: 'Informarción del destinario'
+      label: 'Información del destinario'
     },
     {
       label: 'Detalles del pago'

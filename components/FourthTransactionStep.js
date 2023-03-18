@@ -15,15 +15,14 @@ export function FourthTransactionStep({ prevStep, orderInfo, setOrderInfo }) {
         pairRate: 'EUR/VES',
         payMethod: orderInfo.payMethod,
         quantity: orderInfo.quantity,
+        purpose: orderInfo.purpose,
         beneficiary: {
           name: orderInfo.name,
           documentId: orderInfo.documentId,
           bankName: orderInfo.bankName,
           accountId: orderInfo.accountId,
           accountType: orderInfo.accountType
-        },
-        newBeneficiary: true,
-        saveBeneficiary: orderInfo.saveBeneficiary
+        }
       }
 
       const res = await createOrder(order)

@@ -336,7 +336,7 @@ export function SecondTransactionStep({
           {getFormErrorMessage('accountType')}
         </div>
 
-        <div className={styles.inputContainer}>
+        {/* <div className={styles.inputContainer}>
           <Controller
             name="saveBeneficiary"
             control={control}
@@ -357,7 +357,7 @@ export function SecondTransactionStep({
               </div>
             )}
           />
-        </div>
+                </div> */}
 
         <div className={styles.formButtons}>
           <Button

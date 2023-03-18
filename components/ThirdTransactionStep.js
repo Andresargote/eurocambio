@@ -11,7 +11,8 @@ export function ThirdTransactionStep({
   nextStep,
   prevStep,
   orderInfo,
-  setOrderInfo
+  setOrderInfo,
+  beneficiaries,
 }) {
   const defaultValues = {
     purpose: orderInfo?.purpose || '',

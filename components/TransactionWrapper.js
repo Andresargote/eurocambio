@@ -5,6 +5,7 @@ import { SecondTransactionStep } from './SecondTransactionStep'
 import { StepsComponent } from './StepsComponent'
 import { ThirdTransactionStep } from './ThirdTransactionStep'
 import { getPairRates } from '../services/admin'
+import { getMyBeneficiaries } from '../services/orders'
 
 export function TransactionWrapper() {
   const [step, setStep] = useState(0)
@@ -26,6 +27,17 @@ export function TransactionWrapper() {
       .catch((err) => {
         console.log(err)
       })
+  }, [])
+
+  const [beneficiaries, setBeneficiaries] = useState([])
+
+  async function handleGerBeneficiaries() {
+    const data = await getMyBeneficiaries()
+    setBeneficiaries(data)
+  }
+
+  useEffect(() => {
+    handleGerBeneficiaries()
   }, [])
 
   const handleNextStep = () => {
@@ -54,6 +66,7 @@ export function TransactionWrapper() {
             prevStep={handlePreviousStep}
             orderInfo={orderInfo}
             setOrderInfo={setOrderInfo}
+            beneficiaries={beneficiaries}
           />
         )
       case 2:
@@ -63,6 +76,7 @@ export function TransactionWrapper() {
             prevStep={handlePreviousStep}
             orderInfo={orderInfo}
             setOrderInfo={setOrderInfo}
+            beneficiaries={beneficiaries}
           />
         )
       case 3:

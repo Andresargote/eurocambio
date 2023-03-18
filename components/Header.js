@@ -55,7 +55,8 @@ export default function Header() {
             },
             {
               label: 'Historial de transacciones',
-              icon: 'pi pi-history'
+              icon: 'pi pi-history',
+              command: () => router.push('/order-history')
             },
             true && {
               label: 'Tipos de cambio',

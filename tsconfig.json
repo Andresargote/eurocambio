@@ -29,11 +29,11 @@
     "pages/exchange-rates.js",
     "components/FirstTransactionStep.js",
     "components/TransactionWrapper.js",
-    "components/SecondTransactionStep.js",
+    "components/SecondTransactionStep.tsx",
     "components/TransactionDetails.js",
     "components/ThirdTransactionStep.js",
     "components/ClientDetails.js",
-    "components/FourthTransactionStep.js"
+    "components/FourthTransactionStep.tsx"
   ],
   "exclude": ["node_modules"]
 }

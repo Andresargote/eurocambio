@@ -29,9 +29,20 @@ export default function OrderHistory() {
       </Head>
       <div className="container">
         <Header />
-        {loading ? <div>Loading...</div> : orders.map((o: Order) => <div key={o.id}>
-            <p>id: {o.id}</p>
-        </div>)}
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          orders.map((o: Order) => (
+            <div key={o.id}>
+              <p>Destinatario: {o.beneficiary.name}</p>
+              <p>Monto pagado: {o.totalToPay} EUR</p>
+              <p>Tasa de cambio: </p>
+              <p>Monto recibido: {o.totalToReceive} VEF</p>
+              <p>Estado de la transacción: {o.status}</p>
+              <p>Fecha de transacción: {o.createdAt}</p>
+            </div>
+          ))
+        )}
       </div>
     </>
   )

@@ -1,23 +1,35 @@
 import { useEffect, useState } from 'react'
+import { Skeleton } from 'primereact/skeleton'
+
 import { FirstTransactionStep } from './FirstTransactionStep'
 import { FourthTransactionStep } from './FourthTransactionStep'
 import { SecondTransactionStep } from './SecondTransactionStep'
 import { StepsComponent } from './StepsComponent'
 import { ThirdTransactionStep } from './ThirdTransactionStep'
 import { getPairRates } from '../services/admin'
-import { getMyBeneficiaries } from '../services/orders'
+import { getMyBeneficiaries, OrderForm } from '../services/orders'
+import { PairRate } from '../services/pairRates'
 
 export function TransactionWrapper() {
   const [step, setStep] = useState(0)
-  const [exchangeRate, setExchangeRate] = useState({})
-  const [orderInfo, setOrderInfo] = useState({
-    commission: 1.99
+  const [exchangeRate, setExchangeRate] = useState<PairRate>()
+  const [orderInfo, setOrderInfo] = useState<OrderForm>({
+    commission: 1.99,
+    payMethod: '',
+    purpose: '',
+    name: '',
+    bankName: '',
+    quantity: 0,
+    accountId: '',
+    documentId: '',
+    accountType: '',
+    phoneNumber: ''
   })
 
   useEffect(() => {
     getPairRates()
       .then((res) => {
-        const data = res.filter((item) => item.name === 'EUR/VES')[0]
+        const data = res.find((item: PairRate) => item.name === 'EUR/VES')
         setExchangeRate(data)
         setOrderInfo((prev) => ({
           ...prev,
@@ -88,7 +100,7 @@ export function TransactionWrapper() {
           />
         )
       default:
-        return <FirstTransactionStep nextStep={handleNextStep} />
+        return <Skeleton shape='rectangle' />
     }
   }
 

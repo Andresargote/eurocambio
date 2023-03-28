@@ -12,6 +12,30 @@ export default function Header() {
   const { user, signOut } = useContext(AuthContext)
   const router = useRouter()
 
+  const items = [
+    {
+        index: 0,
+        label: 'Envíar remesa',
+        icon: 'pi pi-money-bill',
+        route: '/app',
+        command: () => router.push('/app')
+    },
+    {
+        index: 1,
+        label: 'Historial de transacciones',
+        icon: 'pi pi-history',
+        route: '/order-history',
+        command: () => router.push('/order-history')
+    },
+    true && {
+        index: 2,
+        label: 'Tipos de cambio',
+        icon: 'pi pi-money-bill',
+        route: '/exchange-rates',
+        command: () => router.push('/exchange-rates')
+    }
+  ];
+
   return (
     <header className={styles.header}>
       <div className={styles.containerPageNameAndAvatar}>
@@ -47,23 +71,8 @@ export default function Header() {
       </div>
       <nav>
         <TabMenu
-          model={[
-            {
-              label: 'Envíar remesa',
-              icon: 'pi pi-money-bill',
-              command: () => router.push('/app')
-            },
-            {
-              label: 'Historial de transacciones',
-              icon: 'pi pi-history',
-              command: () => router.push('/order-history')
-            },
-            true && {
-              label: 'Tipos de cambio',
-              icon: 'pi pi-money-bill',
-              command: () => router.push('/exchange-rates')
-            }
-          ]}
+          model={items}
+          activeIndex={items.find(i => i.route === router.pathname).index}
         />
       </nav>
     </header>

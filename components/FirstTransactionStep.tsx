@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { classNames } from 'primereact/utils'
 import { InputNumber } from 'primereact/inputnumber'
@@ -6,18 +6,33 @@ import { Message } from 'primereact/message'
 import { Dropdown } from 'primereact/dropdown'
 import { Button } from 'primereact/button'
 import styles from '../styles/TransactionSteps.module.css'
+import { OrderForm } from '../services/orders'
+import { PairRate } from '../services/pairRates'
+
+interface Props {
+    nextStep: () => void;
+    exchangeRate: PairRate;
+    orderInfo: OrderForm;
+    setOrderInfo: Dispatch<SetStateAction<OrderForm>>
+}
+
+interface Indexing {
+  [name: string]: any
+}
 
 export function FirstTransactionStep({
   nextStep,
   exchangeRate,
   orderInfo,
   setOrderInfo
-}) {
+}: Props) {
   const [destinataryReceive, setDestinataryReceive] = useState(0)
-  const defaultValues = {
+  const defaultValues: Indexing = {
     quantity: orderInfo?.quantity || 10,
-    shippingMethod: orderInfo?.shippingMethod || ''
+    payMethod: orderInfo?.payMethod || ''
   }
+
+  console.log(exchangeRate)
 
   const {
     control,
@@ -33,10 +48,12 @@ export function FirstTransactionStep({
 
   useEffect(() => {
     const quantity = watch('quantity')
-    setDestinataryReceive(quantity * exchangeRate.price || 0)
+    if (exchangeRate) {
+      setDestinataryReceive(quantity * exchangeRate.price || 0)
+    }
   }, [watch('quantity'), exchangeRate])
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data: Partial<OrderForm>, e: any) => {
     e.preventDefault()
     setOrderInfo((prev) => ({
       ...prev,
@@ -45,7 +62,7 @@ export function FirstTransactionStep({
     nextStep()
   }
 
-  const getFormErrorMessage = (name) =>
+  const getFormErrorMessage = (name: string) =>
     errors[name] && <small className="p-error">{errors[name]?.message}</small>
 
   return (
@@ -111,7 +128,7 @@ export function FirstTransactionStep({
         <div className={styles.inputContainer}>
           <label
             htmlFor="shippingMethod"
-            className={classNames({ 'p-error': !!errors.shippingMethod })}
+            className={classNames({ 'p-error': !!errors.payMethod })}
           >
             Pago a tu destinatario vía
           </label>
@@ -126,7 +143,7 @@ export function FirstTransactionStep({
                 id={field.name}
                 {...field}
                 className={classNames({
-                  'p-invalid': !!errors.shippingMethod
+                  'p-invalid': !!errors.payMethod
                 })}
                 options={[
                   { label: 'Transferencia bancaria', value: 'bank_deposit' }

@@ -36,6 +36,7 @@ export interface OrderForm {
   accountType: string
   phoneNumber: string
   beneficiaryId?: string
+  commission: number;
 }
 
 export interface CreateOrder {

@@ -76,15 +76,13 @@ export default function SignUpComponent() {
   const getFormErrorMessage = (name: keyof FormValues) =>
     errors[name] && <small className="p-error">{errors[name]?.message}</small>
 
-  useEffect(() => {
-    return () => {
+  useEffect(() => () => {
       clearTimeout(setTimeOutId)
-    }
-  }, [])
+    }, [])
 
   return (
     <>
-      <Toast ref={toast}></Toast>
+      <Toast ref={toast} />
       <div className={styles.signUpContainer}>
         <form
           className={styles.formContainer}

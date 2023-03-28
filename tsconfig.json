@@ -25,7 +25,6 @@
     "context/AuthContext.js",
     "components/Header.js",
     "services/users.js",
-    "pages/app/index.js",
     "pages/exchange-rates.js",
     "components/FirstTransactionStep.js",
     "components/TransactionWrapper.js",
@@ -33,7 +32,15 @@
     "components/TransactionDetails.js",
     "components/ThirdTransactionStep.js",
     "components/ClientDetails.js",
-    "components/FourthTransactionStep.tsx"
+    "components/FourthTransactionStep.tsx",
+    "components/FirstTransactionStep.tsx",
+    "components/TransactionDetails.tsx",
+    "components/ThirdTransactionStep.tsx",
+    "components/TransactionWrapper.tsx",
+    "pages/exchange-rates.tsx",
+    "pages/app/index.tsx",
+    "pages/app/success.tsx",
+    "pages/app/failed.tsx",
   ],
   "exclude": ["node_modules"]
 }

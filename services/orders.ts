@@ -7,6 +7,7 @@ export interface Beneficiary {
   bankName: string
   accountId: string
   accountType: string
+  phoneNumber: string
 }
 
 export interface Order {
@@ -35,8 +36,9 @@ export interface OrderForm {
   accountId: string
   accountType: string
   phoneNumber: string
-  beneficiaryId?: string
+  beneficiary?: string
   commission: number;
+  paymentReference: string;
 }
 
 export interface CreateOrder {
@@ -58,9 +60,11 @@ export const createTransferOrder = async (order: CreateOrder) => {
 }
 
 export const createCardOrder = async (order: CreateOrder) => {
-  console.log(order)
+  const { data } = await api.post('/orders/stripe', order)
+  return data;
 }
 
+// Beneficiaries
 export const getMyBeneficiaries = async () => {
   const { data } = await api.get('/orders/beneficiary')
   return data

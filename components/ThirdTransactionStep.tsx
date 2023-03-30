@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { classNames } from 'primereact/utils'
 import { Dropdown } from 'primereact/dropdown'
@@ -6,6 +7,20 @@ import { Button } from 'primereact/button'
 import { ClientDetails } from './ClientDetails'
 import { TransactionDetails } from './TransactionDetails'
 import styles from '../styles/TransactionSteps.module.css'
+import { Beneficiary, OrderForm } from '../services/orders'
+
+interface Props {
+    nextStep: () => void;
+    prevStep: () => void;
+    orderInfo: OrderForm;
+    setOrderInfo: Dispatch<SetStateAction<OrderForm>>;
+    beneficiaries: Array<Beneficiary>
+    selectedBeneficiary: Beneficiary | null;
+}
+
+interface Indexing {
+    [name: string]: string
+}
 
 export function ThirdTransactionStep({
   nextStep,
@@ -13,8 +28,10 @@ export function ThirdTransactionStep({
   orderInfo,
   setOrderInfo,
   beneficiaries,
-}) {
-  const defaultValues = {
+  selectedBeneficiary,
+}: Props) {
+
+  const defaultValues: Indexing = {
     purpose: orderInfo?.purpose || '',
     paymentReference: orderInfo?.paymentReference || ''
   }
@@ -25,7 +42,7 @@ export function ThirdTransactionStep({
     handleSubmit
   } = useForm({ defaultValues })
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data: Indexing, e: any) => {
     e.preventDefault()
     setOrderInfo((prev) => ({
       ...prev,
@@ -34,13 +51,17 @@ export function ThirdTransactionStep({
     nextStep()
   }
 
-  const getFormErrorMessage = (name) =>
+  const getFormErrorMessage = (name: string) =>
     errors[name] && <small className="p-error">{errors[name]?.message}</small>
+
+  useEffect(() => {
+    console.log('effect', selectedBeneficiary);
+  }, [])
 
   return (
     <div className={styles.transactionDetailContainer}>
       <TransactionDetails orderInfo={orderInfo} />
-      <ClientDetails orderInfo={orderInfo} />
+      <ClientDetails orderInfo={orderInfo} selectedBeneficiary={selectedBeneficiary} />
 
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>

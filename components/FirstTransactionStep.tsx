@@ -32,8 +32,6 @@ export function FirstTransactionStep({
     payMethod: orderInfo?.payMethod || ''
   }
 
-  console.log(exchangeRate)
-
   const {
     control,
     formState: { errors },
@@ -55,6 +53,10 @@ export function FirstTransactionStep({
 
   const onSubmit = (data: Partial<OrderForm>, e: any) => {
     e.preventDefault()
+    console.log(data, 'data');
+    if (!data.payMethod) {
+        return;
+    }
     setOrderInfo((prev) => ({
       ...prev,
       ...data
@@ -133,11 +135,11 @@ export function FirstTransactionStep({
             Pago a tu destinatario vía
           </label>
           <Controller
-            name="shippingMethod"
+            name="payMethod"
             control={control}
-            rules={{
-              required: 'Este campo es requerido.'
-            }}
+            //rules={{
+            //  required: 'Este campo es requerido.'
+            //}}
             render={({ field }) => (
               <Dropdown
                 id={field.name}

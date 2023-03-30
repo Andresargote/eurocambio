@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { classNames } from 'primereact/utils'
 import { Dropdown } from 'primereact/dropdown'
@@ -6,7 +6,7 @@ import { InputText } from 'primereact/inputtext'
 import { Button } from 'primereact/button'
 import { Checkbox } from 'primereact/checkbox'
 import styles from '../styles/TransactionSteps.module.css'
-import { Beneficiary, OrderForm, getMyBeneficiaries } from '../services/orders'
+import { Beneficiary, OrderForm } from '../services/orders'
 import { bankOptions } from '../utils/bankOptions'
 
 interface Props {
@@ -15,10 +15,11 @@ interface Props {
   orderInfo: OrderForm
   setOrderInfo: Dispatch<SetStateAction<OrderForm>>
   beneficiaries: Array<Beneficiary>
+  setBeneficiaryById: (id: string) => void;
 }
 
 interface Indexing {
-  [name: string]: any
+  [name: string]: string;
 }
 
 export function SecondTransactionStep({
@@ -26,7 +27,8 @@ export function SecondTransactionStep({
   prevStep,
   orderInfo,
   setOrderInfo,
-  beneficiaries
+  beneficiaries,
+  setBeneficiaryById,
 }: Props) {
 
   const defaultValues: Indexing = {
@@ -36,8 +38,10 @@ export function SecondTransactionStep({
     accountType: orderInfo?.accountType || '',
     name: orderInfo?.name || '',
     phoneNumber: orderInfo?.phoneNumber || '',
-    beneficiaryId: orderInfo?.beneficiaryId || '',
+    beneficiary: orderInfo?.beneficiary || '',
   }
+
+  const [checked, setChecked] = useState<boolean>(false)
 
   const {
     control,
@@ -47,6 +51,9 @@ export function SecondTransactionStep({
 
   const onSubmit = (data: Indexing, e: any) => {
     e.preventDefault()
+    if (!checked) {
+      setBeneficiaryById(data.beneficiary)
+    }
     setOrderInfo((prev) => ({
       ...prev,
       ...data
@@ -59,7 +66,6 @@ export function SecondTransactionStep({
       <small className="p-error">{`${errors[name]?.message}`}</small>
     )
 
-  const [checked, setChecked] = useState<boolean>(false)
 
   return (
     <div>
@@ -269,7 +275,7 @@ export function SecondTransactionStep({
               htmlFor="shippingMethod"
               className={classNames({ 'p-error': !!errors.shippingMethod })}
             >
-              Pago a tu destinatario vía
+              Elige a tu destinatario
             </label>
             <Controller
               name="beneficiary"

@@ -15,22 +15,22 @@ export default function Header() {
   const items = [
     {
         index: 0,
-        label: 'Envíar remesa',
+        label: 'Envíar',
         icon: 'pi pi-money-bill',
         route: '/app',
         command: () => router.push('/app')
     },
     {
         index: 1,
-        label: 'Historial de transacciones',
+        label: 'Historial',
         icon: 'pi pi-history',
         route: '/order-history',
         command: () => router.push('/order-history')
     },
-    true && {
+    user.isAdmin && {
         index: 2,
-        label: 'Tipos de cambio',
-        icon: 'pi pi-money-bill',
+        label: 'Cambios',
+        icon: 'pi pi-sync',
         route: '/exchange-rates',
         command: () => router.push('/exchange-rates')
     }
@@ -39,7 +39,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.containerPageNameAndAvatar}>
-        <h1>Eurocambiovzl</h1>
+        <h1 style={{ fontSize: '1.4rem' }} >Eurocambiosvzl</h1>
         <div>
           <button
             type="button"
@@ -52,7 +52,7 @@ export default function Header() {
               label={user?.firstName.charAt(0)}
               shape="circle"
               size="large"
-              style={{ backgroundColor: '#2196F3', color: '#ffffff' }}
+              style={{ backgroundColor: '#2196F3', color: '#ffffff', width: '2.5rem', height: '2.5rem' }}
             />
           </button>
           <TieredMenu

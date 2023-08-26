@@ -22,6 +22,7 @@ export default function OrderHistory() {
             data = data.docs.map((o: Order) => {
                 const object = {
                     ...o,
+                    beneficiary: o.beneficiary.name,
                     totalToPay: `${o.totalToPay.toFixed(2)} ${o.pairRate.split('/', 1)[0]}`,
                     totalToReceive: `${o.totalToReceive.toFixed(2)} ${o.pairRate.split('/')[1]}`,
                     quantity: `${o.totalToReceive.toFixed(2)} ${o.pairRate.split('/', 1)[0]}`,
@@ -63,6 +64,7 @@ export default function OrderHistory() {
                     ) : (
                         <DataTable value={orders} scrollable style={{ overflowX: 'scroll' }} tableStyle={{ minWidth: '40rem' }} >
                             <Column field="createdAt" header="Fecha" style={{ width: '30%' }} />
+                            <Column field="beneficiary" header="Destinatario" />
                             <Column field="quantity" header="Enviado" />
                             <Column field="totalToReceive" header="Rebido" />
                             <Column field="totalToPay" header="Pagado" />

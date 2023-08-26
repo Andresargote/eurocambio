@@ -27,7 +27,7 @@ export default function Header() {
         route: '/order-history',
         command: () => router.push('/order-history')
     },
-    user.isAdmin && {
+    true && {
         index: 2,
         label: 'Cambios',
         icon: 'pi pi-sync',
@@ -58,6 +58,16 @@ export default function Header() {
           <TieredMenu
             model={[
               {
+                label: 'Enviar',
+                icon: 'pi pi-money-bill',
+                command: () => router.push('/app')
+              },
+              {
+                label: 'Perfil',
+                icon: 'pi pi-user',
+                command: () => router.push('/profile')
+              },
+              {
                 label: 'Cerrar sesión',
                 icon: 'pi pi-sign-out',
                 command: () => signOut()
@@ -69,12 +79,14 @@ export default function Header() {
           />
         </div>
       </div>
+      {!router.pathname.includes('profile') && (
       <nav>
         <TabMenu
           model={items}
-          activeIndex={items.find(i => i.route === router.pathname).index}
+          activeIndex={items.find(i => i?.route === router.pathname)?.index}
         />
       </nav>
+      )}
     </header>
   )
 }

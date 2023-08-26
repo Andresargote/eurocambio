@@ -40,6 +40,9 @@
     "pages/app/index.tsx",
     "pages/app/success.tsx",
     "pages/app/failed.tsx",
+    "components/Header.tsx",
+    "pages/profile.tsx",
+    "components/ProfileForm.tsx"
   ],
   "exclude": ["node_modules"]
 }

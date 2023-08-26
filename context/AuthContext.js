@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   const signOut = () => {
     destroyCookie(undefined, 'nextauth.token')
     destroyCookie(undefined, 'nextauth.refreshtoken')
-    setUser(null)
+    //setUser(null)
     router.push('/login')
   }
 
